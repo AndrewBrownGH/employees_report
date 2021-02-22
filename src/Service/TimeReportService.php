@@ -28,41 +28,37 @@ class TimeReportService
     private function createFormattedReports(array $reports): array
     {
         $formattedReports = [];
-
         $topCount = 3;
-        $maxDaySize = 9;
         $start = 0;
-        $maxNameSize = 0;
-        $maxTimeSize = 0;
 
-        for ($i = 0; $i < count($reports); $i++) {
-            if (strlen($reports[$i]['name']) > $maxNameSize) {
-                $maxNameSize = strlen($reports[$i]['name']);
-            }
-
-            if (strlen($reports[$i]['sum_hours']) > $maxTimeSize) {
-                $maxTimeSize = strlen($reports[$i]['sum_hours']);
-            }
-        }
-        $maxCellSize = $maxNameSize + $maxTimeSize;
+        $maxCellSize = $this->getMaxCellSize($reports);
 
         for ($i = 0; $i < count(self::DAYS); $i++) {
             $row = $this->getFormattedDay(self::DAYS[$i]);
+            $count = 0;
 
             for ($j = $start; $j < $start + $topCount; $j++) {
-                if ($j > count($reports)) {
+                if ($j >= count($reports)) {
+                    if ($count === 0) {
+                        $row .= "No Results";
+                    }
                     break;
                 }
 
                 if ($reports[$j]['day_name'] === self::DAYS[$i]) {
-                    $row .= $reports[$j]['name'] . " (" . $this->getRoundHours($reports[$j]['sum_hours']) . ")";
-
-                    $currentCellSize = strlen($reports[$j]['name']) + strlen($reports[$j]['sum_hours']);
-                    $row .= str_repeat(' ', $maxCellSize - $currentCellSize);
-                    $row .= " | ";
+                    $row .= $this->getFormattedCell($reports[$j]['name'], $reports[$j]['sum_hours'], $maxCellSize);
 
                     $start++;
+                    $count++;
                 } else {
+                    if ($count == 0) {
+                        $row .= "No Results";
+                        break;
+                    }
+                    for ($k = 0; $k < $topCount - $count; $k++) {
+                        $row .= str_repeat(' ', $maxCellSize + 3);
+                        $row .= " | ";
+                    }
                     break;
                 }
             }
@@ -84,8 +80,38 @@ class TimeReportService
 
         $day = " | " . $weekDay;
         $day .= str_repeat(' ', $maxDaySize - strlen($weekDay));
-        $day .= "| ";
+        $day .= " | ";
 
         return $day;
+    }
+
+    private function getFormattedCell(string $name, string $hours, $maxCellSize)
+    {
+        $hours = $this->getRoundHours($hours);
+        $cell = $name . " (" . $hours . ")";
+
+        $currentCellSize = strlen($name) + strlen($hours);
+
+        $cell .= str_repeat(' ', $maxCellSize - $currentCellSize);
+        $cell .= " | ";
+
+        return $cell;
+    }
+
+    private function getMaxCellSize(array $reports)
+    {
+        $maxNameSize = $maxTimeSize = 0;
+
+        for ($i = 0; $i < count($reports); $i++) {
+            if (strlen($reports[$i]['name']) > $maxNameSize) {
+                $maxNameSize = strlen($reports[$i]['name']);
+            }
+
+            if (strlen($this->getRoundHours($reports[$i]['sum_hours'])) > $maxTimeSize) {
+                $maxTimeSize = strlen($this->getRoundHours($reports[$i]['sum_hours']));
+            }
+        }
+
+        return $maxNameSize + $maxTimeSize;
     }
 }

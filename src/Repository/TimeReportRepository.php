@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\TimeReport;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -31,6 +30,8 @@ class TimeReportRepository extends ServiceEntityRepository
                                     desc) AS number_report
                          from employees
                                   join time_reports on employees.id = time_reports.employee_id
+                         where YEAR(time_reports.date) = YEAR(CURRENT_TIMESTAMP()) AND WEEK(time_reports.date, 1) = WEEK
+                             (CURRENT_TIMESTAMP(), 1)
                          group by time_reports.date, employees.id
                          order by time_reports.date, sum_hours desc
                      ) result

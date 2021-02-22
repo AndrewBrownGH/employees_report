@@ -12,7 +12,7 @@ class EmployeeAndReportFixtures extends Fixture
 {
     private const NAMES = ['Andrew', 'John', 'Alex', 'Pavel', 'Vera'];
 
-    private const COUNT_EMPLOYEES = 30;
+    private const COUNT_EMPLOYEES = 6;
 
     public function load(ObjectManager $manager)
     {
@@ -46,7 +46,7 @@ class EmployeeAndReportFixtures extends Fixture
 
         $randomDate = date($format, mt_rand($startDate, $endDate));
 
-        return new DateTime($randomDate); //todo throw exception
+        return new DateTime($randomDate);
     }
 
     private function getEmployeeReports(Employee $employee, int $count = 1): array
@@ -57,7 +57,7 @@ class EmployeeAndReportFixtures extends Fixture
             $reports[] = new TimeReport(
                 $employee,
                 $this->getRandomHours(),
-                $this->getRandomDate('2021-02-16', '2021-02-23', 'Y-m-d')
+                $this->getRandomDate('2021-02-22', '2021-02-28', 'Y-m-d')
             );
         }
 
