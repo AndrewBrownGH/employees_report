@@ -3,13 +3,13 @@ The purpose of the task is to write a program that will fetch the information ab
 
 The following is an example of the database tables structure: 
 
-`employees` 
+employees
 | id | name | 
 ------------- 
 | 42 | John | 
 | 43 | Jane | 
 
-`time_reports` 
+time_reports
 | id | employee_id | hours |    date   | 
 ---------------------------------------- 
 |  1 |      42     |  4.5  | 12/1/2020 | 
