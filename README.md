@@ -10,7 +10,6 @@ employees
 | 43 | Jane | 
 
 time_reports
-
 | id | employee_id | hours |    date   | 
 ---------------------------------------- 
 |  1 |      42     |  4.5  | 12/1/2020 | 
