@@ -5,7 +5,7 @@ The following is an example of the database tables structure:
 
 employees
 | id | name | 
-------------- 
+| ---| -----|
 | 42 | John | 
 | 43 | Jane | 
 
