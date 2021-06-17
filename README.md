@@ -5,13 +5,13 @@ The following is an example of the database tables structure:
 
 `employees`
 | id | name | 
-| ---| -----|
+|----| -----|
 | 42 | John | 
 | 43 | Jane | 
 
-time_reports
+`time_reports`
 | id | employee_id | hours |    date   | 
----------------------------------------- 
+|--------------------------------------|
 |  1 |      42     |  4.5  | 12/1/2020 | 
 |  2 |      42     |  7.0  | 12/2/2020 | 
 |  3 |      43     |  5.5  | 12/1/2020 | 
@@ -24,7 +24,7 @@ time_reports
 Example of the output: 
 | Monday | John (4.45 hours), Jane (7.54 hours), Alex (3.5 hours) | 
 | Tuesday| Jane (4.54 hours), Alex (7.5 hours)                    | 
-...  
+| ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... | 
 
 The following is a list of requirements for the program: 
 1. The output shall include the names of the people and their average working hours in parenthesis for that day rounded up to the 2 decimal points 
