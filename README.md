@@ -3,7 +3,7 @@ The purpose of the task is to write a program that will fetch the information ab
 
 The following is an example of the database tables structure: 
 
-employees
+`employees`
 | id | name | 
 | ---| -----|
 | 42 | John | 
