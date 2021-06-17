@@ -19,12 +19,7 @@ The following is an example of the database tables structure:
 
 employee_id is a foreign key for employee.id
 hours has float type 
-date is a date in US format M/d/YYYY 
-
-Example of the output: 
-| Monday | John (4.45 hours), Jane (7.54 hours), Alex (3.5 hours) | 
-| Tuesday| Jane (4.54 hours), Alex (7.5 hours)                    | 
-| ... ...| ... ... ... ... ... ... ... ... ... ... ... ... ... ...| 
+date is a date in US format `M/d/YYYY` 
 
 The following is a list of requirements for the program: 
 1. The output shall include the names of the people and their average working hours in parenthesis for that day rounded up to the 2 decimal points 
