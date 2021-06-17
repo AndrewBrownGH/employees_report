@@ -17,9 +17,9 @@ The following is an example of the database tables structure:
 |  3 |      43     |  5.5  | 12/1/2020 | 
 |  4 |      43     |  6.0  | 12/2/2020 | 
 
-`employee_id` is a foreign key for `employee.id` 
-`hours` has float type 
-`date` is a date in US format M/d/YYYY 
+employee_id is a foreign key for employee.id
+hours has float type 
+date is a date in US format M/d/YYYY 
 
 Example of the output: 
 | Monday | John (4.45 hours), Jane (7.54 hours), Alex (3.5 hours) | 
